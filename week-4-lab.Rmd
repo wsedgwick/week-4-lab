@@ -1,6 +1,6 @@
 ---
 title: "EDS 222: Week 4: In-class Lab"
-author: "ANSWER KEY"
+author: "Wade Sedgwick"
 date: "`r Sys.Date()`"
 output:
   tufte::tufte_html: default
