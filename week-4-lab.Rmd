@@ -34,7 +34,11 @@ rootdir <- ("/Users/wsedgwick/Desktop/bren_meds/courses/fall/EDS_222/week-4-lab/
 
 
 # This runs the script _common.R, which loads all the packages we'll need for today and does some extra stuff we won't really use, at least for now.
-source(file.path(rootdir,"labs","_common.R"))
+
+
+# source(file.path(rootdir, "labs", "_common.R"))
+
+source(file.path(rootdir, "_common.R"))
 
 # For labs, we want to see all our code
 knitr::opts_chunk$set(echo = TRUE)
@@ -113,6 +117,8 @@ head(mpg)
 dim(mpg)
 unique(mpg$year)
 
+class(mpg$year)
+
 mpg = mpg %>% 
   mutate(year = as.factor(year))
 class(mpg$year)
@@ -144,11 +150,13 @@ Here is our regression: $$hwy_i=\beta_{0}+\beta_{1} \cdot vintage_i +\varepsilon
 
 3.  What does the coefficient estimate on the 2008 vintage indicator variable tell you, in words?
 
+The coefficient estimate on the 2008 vintage indicator variable is the average miles per gallon when the year was 1999.
+
 **Answers:**
 
 ```{r}
 
-lm(hwy ~ year, data = mpg) %>% 
+  lm(hwy ~ year, data = mpg) %>% 
   summary() %>% 
   xtable() %>% 
   kable()
@@ -158,11 +166,13 @@ lm(hwy ~ year, data = mpg) %>%
 # Intercept est. is the average mpg when year = 1999
 ```
 
--   **Intercept:**
+-   **Intercept: The mean miles per gallon for the 1999 year is 23.4.**
 
--   **Coefficient on year 2008 indicator variables:**
+-   **Coefficient on year 2008 indicator variables: The 2008 year is on average 0.026 miles per gallon higher than the 1999 year.**
 
 4.  Does your model suggest anything about whether fuel efficiency has evolved over time? Why or why not?
+
+**Our model suggests that fuel efficiency does not evolve over time because 0.026 is an increase in fuel efficiency.**
 
 **Answer:**
 
@@ -228,15 +238,15 @@ lm(hwy ~ displ + year, data = mpg) %>%
 
 **Answer:**
 
--   **Intercept:**
+-   **Intercept: The average miles per gallon in 1999, when the engine size is 0, is 35.28.**
 
--   **Coefficient on engine size:**
+-   **Coefficient on engine size: For every 1 liter increase in engine size, there is a 3.61 decrease in predicted miles per gallon, holding the year fixed.**
 
--   **Coefficient on year:**
+-   **Coefficient on year: On average, there is a 1.4 mile per gallon increase from year 1999 to year 2008, holding engine size constant.**
 
 3.  Does your model suggest anything about whether fuel efficiency has evolved over time after controlling for engine size? Why or why not? Why is this different from the results we found in simple linear regression above?
 
-**Answer:**
+**Answer: The model suggests that fuel efficiency increases by an average of 1.4 miles per gallon from 1999 to 2008. It is due to larger engine sizes that overall fuel efficiency does not appear to increase, which are less fuel efficient. When we hold engine size constant, we are able to see the more fuel efficient cars in 2008.**
 
 **Step 3: Visualize your regression (parallel slopes)**
 
@@ -264,6 +274,8 @@ Start by storing your regression results in a new way, using `augment()`, which 
 **Answer:**
 
 ```{r, echo=TRUE, cache=T}
+
+
 
 ```
 
